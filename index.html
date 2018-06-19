@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="contador">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Contador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="lib/main.css" />
+    <script src="lib/angular.js"></script>
+    
+    <script>
+        angular.module("contador",[]);
+        
+        angular.module("contador").controller("contadorCtrl", function($scope){})
+        
+    </script>
+</head>
+<body>
+    <script> // inicializacao do FB
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : '258934994653626',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.0'
+          });
+          FB.getLoginStatus(function(response) {
+             statusChangeCallback(response);
+            });
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
+         function statusChangeCallback(response){
+             if(response === 'connected'){
+                 console.log('Logged in and authenticated');
+             }else{
+                 console.log('Not authenticated');
+             }
+         }
+
+      </script>
+</body>
+</body>
+</html>
