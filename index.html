@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Contador</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="lib/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="https://bootswatch.com/4/darkly/bootstrap.min.css" />
     <script src="lib/angular.js"></script>
     
     <script>
@@ -24,6 +24,7 @@
             xfbml            : true,
             version          : 'v3.0'
           });
+          FB.AppEvents.logPageView()
           FB.getLoginStatus(function(response) {
              statusChangeCallback(response);
             });
@@ -45,18 +46,56 @@
              }
          }
 
-
          function checkLoginState(){
-             FB.getLoginStatus(function(response)){
+             FB.getLoginStatus(function(response){
                  statusChangeCallback(response);
-             }
+             })
          }
+         
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+             });
+        }
+        
+        function onButtonClick() {
+            console.log('foi');
+                FB.api("175999989735547/insights/page_content_activity",function (response) {
+                    if (response && !response.error) {
+                        console.log(response);
+                        console.log('response');
+                    }
+                    console.log(response);
+                })
+        }
       </script>
 
-      <fb: login-button
-        scope="public_profile,email,birthday"
-        onlogin="checkLoginState();">
-        </fb:login-button>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Contador</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <ul class="navbar-nav mr-auto navbar-right">
+            <li class="nav-item active">
+                <fb:login-button 
+                    id="fb-btn"
+                    scope="public_profile,email"
+                    onlogin="checkLoginState();">
+                </fb:login-button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <button onclick="onButtonClick()">Click me</button> 
+      <ul id="userLikes"></ul>
 </body>
 </body>
 </html>
